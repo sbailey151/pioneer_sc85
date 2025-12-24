@@ -1,6 +1,6 @@
 DOMAIN = "pioneer_sc85"
 DEFAULT_PORT = 23
-DEFAULT_HOST = 192.168.128.183
+DEFAULT_HOST = "192.168.128.183"
 
 ZONES = {
     "main": "MZ",

@@ -1,6 +1,6 @@
 from homeassistant import config_entries
 import voluptuous as vol
-from .const import DOMAIN, DEFAULT_PORT
+from .const import DOMAIN, DEFAULT_PORT, DEFAULT_HOST
 
 class PioneerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input=None):
