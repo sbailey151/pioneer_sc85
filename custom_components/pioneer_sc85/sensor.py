@@ -1,18 +1,24 @@
 from homeassistant.components.sensor import SensorEntity
-from .const import AUDIO_FORMATS
+from homeassistant.helpers.device_registry import DeviceInfo
+from .const import AUDIO_FORMATS, get_device_info
 
 async def async_setup_entry(hass, entry, async_add_entities):
     telnet = hass.data["pioneer_sc85"][entry.entry_id]
     async_add_entities([
-        AudioFormatSensor(telnet),
-        FrontPanelSensor(telnet)
+        AudioFormatSensor(telnet, entry),
+        FrontPanelSensor(telnet, entry)
     ])
 
 class AudioFormatSensor(SensorEntity):
-    def __init__(self, telnet):
+    def __init__(self, telnet, entry):
         self.telnet = telnet
+        self.entry = entry
         self._state = None
         telnet.register(self._parse)
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        return get_device_info(self.entry)
 
     @property
     def name(self):
@@ -28,10 +34,15 @@ class AudioFormatSensor(SensorEntity):
             self.schedule_update_ha_state()
 
 class FrontPanelSensor(SensorEntity):
-    def __init__(self, telnet):
+    def __init__(self, telnet, entry):
         self.telnet = telnet
+        self.entry = entry
         self._state = ""
         telnet.register(self._parse)
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        return get_device_info(self.entry)
 
     @property
     def name(self):

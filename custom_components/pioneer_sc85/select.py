@@ -1,15 +1,21 @@
 from homeassistant.components.select import SelectEntity
-from .const import DSP_MODES
+from homeassistant.helpers.device_registry import DeviceInfo
+from .const import DSP_MODES, get_device_info
 
 async def async_setup_entry(hass, entry, async_add_entities):
     telnet = hass.data["pioneer_sc85"][entry.entry_id]
-    async_add_entities([DSPSelect(telnet)])
+    async_add_entities([DSPSelect(telnet, entry)])
 
 class DSPSelect(SelectEntity):
-    def __init__(self, telnet):
+    def __init__(self, telnet, entry):
         self.telnet = telnet
+        self.entry = entry
         self._mode = None
         telnet.register(self._parse)
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        return get_device_info(self.entry)
 
     @property
     def name(self):

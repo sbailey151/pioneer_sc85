@@ -1,11 +1,13 @@
 {
   "domain": "pioneer_sc85",
-  "name": "Pioneer Elite SC-85",
-  "version": "1.0.0",
-  "documentation": "https://github.com/local/pioneer_sc85",
+  "name": "Pioneer SC-85 Receiver",
+  "version": "0.1.0",
+  "documentation": "https://github.com/sbailey151/pioneer_sc85",
+  "issue_tracker": "https://github.com/sbailey151/pioneer_sc85/issues",
+  "dependencies": [],
+  "codeowners": ["@sbailey151"],
   "requirements": [],
-  "codeowners": [],
-  "iot_class": "local_push",
+  "iot_class": "local_polling",
   "config_flow": true,
-  "platforms": ["media_player", "select", "switch", "sensor"]
+  "loggers": ["pioneer_sc85"]
 }
